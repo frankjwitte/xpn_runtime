@@ -35,7 +35,7 @@
             }
         },
         template: "" +
-        "<nav class='navbar navbar-default'>" +
+        "<nav class='navbar navbar-inverse'>" +
         "<div class='container-fluid'>" +
         "   <ul class='nav navbar-nav'>" +
         "       <li class='dropdown' ng-repeat='menu in $ctrl.menu'>" +
