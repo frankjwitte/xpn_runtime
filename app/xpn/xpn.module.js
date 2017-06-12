@@ -2,7 +2,22 @@
 
     "use strict";
 
-    var module = angular.module("xpn", []);
+    var module = angular.module("xpn", ["ui.router"]);
+
+    module.config(function ($stateProvider) {
+
+        $stateProvider
+            .state("xpnForm", {
+                url: "/form/:id",
+                component: "xpnForm",
+                resolve: {
+                    id: function ($stateParams) {
+                        return $stateParams.id;
+                    }
+                }
+            });
+
+    });
 
     module.component("xpnHeader", {
         transclude: true,
@@ -42,7 +57,7 @@
         "           <a class='dropdown-toggle' data-toggle='dropdown' href='#'>{{ menu.id }} <span class='caret'></span></a>" +
         "           <ul class='dropdown-menu'>" +
         "               <li ng-repeat='item in menu.items'>" +
-        "                   <a href='#'>{{ item.id }}</a>" +
+        "                   <a ui-sref='xpnForm({id: item.id})'>{{ item.id }}</a>" +
         "               </li>" +
         "           </ul>" +
         "       </li>" +
@@ -87,6 +102,14 @@
                 self.xpnHeader.addSubMenu(self.menuHeader.id, {id: self.id})
             }
         }
+    });
+
+    module.component("xpnForm", {
+        bindings: {
+            id: "<"
+        },
+        template: "<fieldset><legend>{{ $ctrl.id }}</legend></fieldset>"
+
     });
 
 }());
