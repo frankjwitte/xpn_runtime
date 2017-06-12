@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>XPN Prototype</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<div class="container" ng-app="app" ng-controller="MainController">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acquisitie <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Nieuw contact</a></li>
+                        <li><a href="#">Overzicht op plaats</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Secretariaat <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Wijzigen contact</a></li>
+                        <li><a href="#">Overzicht op naam</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Systeem beheer <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Verwijderen contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <xpn-header>
+        <xpn-menu>
+
+            <xpn-menu-header id="Acquisition">
+                <xpn-menu-item id="Nieuw contact" form="Nieuw contact"/>
+                <xpn-menu-item id="Overzicht op plaats" report="Overzicht op plaats"/>
+            </xpn-menu-header>
+
+            <xpn-menu-header id="Secretariaat">
+                <xpn-menu-item id="Wijzigen contact" form="Wijzigen  contact"/>
+                <xpn-menu-item id="Overzicht op naam" report="Overzicht op naam"/>
+            </xpn-menu-header>
+
+            <xpn-menu-header id="Systeem beheer">
+                <xpn-menu-item id="Verwijderen contact" form="Contact"/>
+            </xpn-menu-header>
+
+        </xpn-menu>
+    </xpn-header>
+
+
+</div>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="app/app.js"></script>
+<script src="app/xpn/xpn.module.js"></script>
+</body>
+
+</html>

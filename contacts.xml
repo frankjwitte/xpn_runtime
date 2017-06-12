@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<problem id="Contacten">
+    <business-services>
+        <service id="Acquisitie">
+            <task id="Nieuw Contact" form="Nieuw Contact" execution="Sales"/>
+            <task id="Overzicht op plaats" report="Overzicht op plaats" execution="Sales"/>
+        </service>
+        <service id="Secretariaat">
+            <task id="Wijzigen Contact" form="Wijzigen Contact" execution="Secretariaat"/>
+            <task id="Overzicht op naam" report="Overzicht op naam" execution="Secretariaat"/>
+        </service>
+        <service id="Systeem Beheer">
+            <task id="Verwijderen Contact" form="Verwijderen Contact" execution="Administrator"/>
+        </service>
+    </business-services>
+    <business-objects>
+        <object id="Contact">
+            <attribute id="Id" type="Number"/>
+            <key>
+                <attribute id="Email" type="Email"/>
+            </key>
+            <attribute id="Naam" type="String"/>
+            <attribute id="Adres" type="String"/>
+            <attribute id="Postcode" type="Postcode"/>
+            <attribute id="Woonplaats" type="String"/>
+            <attribute id="Geslacht" values="M,V"/>
+            <attribute id="Geboortedatum" type="Date" rule="Agerule"/>
+            <attribute id="Telefoon" type="PhoneNumber"/>
+            <attribute id="Dossier" type="Markdown"/>
+            <attribute id="Foto" type="URL"/>
+        </object>
+    </business-objects>
+    <requests>
+        <form id="Nieuw Contact">
+            <outputattribute id="Id"/>
+            <inputattribute id="Naam"/>
+            <inputattribute id="Adres"/>
+            <inputattribute id="Postcode"/>
+            <inputattribute id="Woonplaats"/>
+            <inputattribute id="Email"/>
+            <inputattribute id="Geslacht"/>
+            <inputattribute id="Geboortedatum"/>
+            <inputattribute id="Telefoon"/>
+            <inputattribute id="Dossier"/>
+            <inputattribute id="Foto"/>
+            <action id="Nieuw Contact"/>
+        </form>
+        <form id="Wijzigen Contact">
+            <outputattribute id="Id"/>
+            <inputattribute id="Naam"/>
+            <inputattribute id="Adres"/>
+            <inputattribute id="Postcode"/>
+            <inputattribute id="Woonplaats"/>
+            <searchattribute id="Email"/>
+            <inputattribute id="Geslacht"/>
+            <inputattribute id="Geboortedatum"/>
+            <inputattribute id="Telefoon"/>
+            <inputattribute id="Dossier"/>
+            <inputattribute id="Foto"/>
+            <action id="Wijzigen Contact"/>
+        </form>
+        <form id="Verwijderen Contact">
+            <outputattribute id="Id"/>
+            <outputattribute id="Naam"/>
+            <ouputattribute id="Adres"/>
+            <ouputattribute id="Postcode"/>
+            <ouputattribute id="Woonplaats"/>
+            <searchattribute id="Email"/>
+            <ouputattribute id="Geslacht"/>
+            <ouputattribute id="Geboortedatum"/>
+            <ouputattribute id="Telefoon"/>
+            <ouputattribute id="Dossier"/>
+            <ouputattribute id="Foto"/>
+            <action id="Verwijderen Contact"/>
+        </form>
+    </requests>
+    <actions>
+        <action id="Nieuw Contact">
+            <message id="Nieuw Contact" verb="Create" object="Contact">
+                <attribute id="Id"/>
+                <attribute id="Naam"/>
+                <attribute id="Adres"/>
+                <attribute id="Postcode"/>
+                <attribute id="Woonplaats"/>
+                <attribute id="Email"/>
+                <attribute id="Geslacht"/>
+                <attribute id="Geboortedatum"/>
+                <attribute id="Telefoon"/>
+                <attribute id="Dossier"/>
+                <attribute id="Foto"/>
+            </message>
+        </action>
+        <action id="Wijzigen Contact">
+            <message id="Wijzigen Contact" verb="Update" object="Contact">
+                <attribute id="Id"/>
+                <attribute id="Naam"/>
+                <attribute id="Adres"/>
+                <attribute id="Postcode"/>
+                <attribute id="Woonplaats"/>
+                <attribute id="Email"/>
+                <attribute id="Geslacht"/>
+                <attribute id="Geboortedatum"/>
+                <attribute id="Telefoon"/>
+                <attribute id="Dossier"/>
+                <attribute id="Foto"/>
+            </message>
+        </action>
+        <action id="Verwijderen Contact">
+            <message id="Verwijderen Contact" verb="Delete" object="Contact">
+                <attribute id="Id"/>
+            </message>
+        </action>
+    </actions>
+    <business-rules>
+        <rule id="Agerule" expression="age('geboortedatum')>=21"/>
+    </business-rules>
+    <responces>
+        <report id="Overzicht op naam" lines="60">
+            <objects id="contact" order="naam">
+                <attribute id="Id"/>
+                <attribute id="Naam"/>
+                <attribute id="Adres"/>
+                <attribute id="Postcode"/>
+                <attribute id="Woonplaats"/>
+                <attribute id="Email"/>
+                <attribute id="Geslacht"/>
+                <attribute id="Geboortedatum"/>
+                <attribute id="Telefoon"/>
+                <attribute id="Dossier"/>
+                <attribute id="Foto"/>
+            </objects>
+        </report>
+        <report id="Overzicht op plaats" lines="60">
+            <objects id="contact" order="Woonplaats, Naam" grouping="Woonplaats">
+                <header>
+                    <attribute id="Woonplaats"/>
+                </header>
+                <attribute id="Id"/>
+                <attribute id="Naam"/>
+                <attribute id="Adres"/>
+                <attribute id="Postcode"/>
+                <attribute id="Email"/>
+                <attribute id="Geslacht"/>
+                <attribute id="Geboortedatum"/>
+                <attribute id="Telefoon"/>
+                <attribute id="Dossier"/>
+                <attribute id="Foto"/>
+                <footer>aantal contacten:
+                    <expression>count("id")</expression>
+                </footer>
+            </objects>
+            <footer>totaal aantal contacten
+                <expression>count("id")</expression>
+            </footer>
+        </report>
+    </responces>
+</problem>

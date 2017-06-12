@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+<V-Header>
+    <V-Menu>
+        <V-Menu-Header v-if="actor='Sales'" id="Acquisitie">
+            <V-Menu-Item v-if="actor='Sales'" id="Nieuw Contact" form="Nieuw Contact"/>
+            <V-Menu-Item v-if="actor='Sales'" id="Overzicht op plaats" report="Overzicht op plaats"/>
+        </V-Menu-Header>
+        <V-Menu-Header v-if="actor='Secretariaat'" id="Secretariaat">
+            <V-Menu-Item v-if="actor='Secretariaat'" id="Wijzigen Contact" form="Wijzigen Contact"/>
+            <V-Menu-Item v-if="actor='Secretariaat'" id="Overzicht op naam" report="Overzicht op naam"/>
+        </V-Menu-Header>
+        <V-Menu-Header v-if="actor='Administrator'" id="Systeem Beheer">
+            <V-Menu-Item v-if="actor='Administrator'" id="Verwijderen Contact" form="Verwijderen Contact"/>
+        </V-Menu-Header>
+    </V-Menu>
+    <V-title>Contacten APP</V-title>
+</V-header>
+
+
+<V-form id="Nieuw Contact">
+    <V-outputattribute id="Id"/>
+    <V-inputattribute id="Naam"/>
+    <V-inputattribute id="Adres"/>
+    <V-inputattribute id="Postcode"/>
+    <V-inputattribute id="Woonplaats"/>
+    <V-inputattribute id="Email"/>
+    <V-inputattribute id="Geslacht"/>
+    <V-inputattribute id="Geboortedatum"/>
+    <V-inputattribute id="Telefoon"/>
+    <V-inputattribute id="Dossier"/>
+    <V-inputattribute id="Foto"/>
+    <V-action id="Nieuw Contact"/>
+</V-form>
+<V-form id="Wijzigen Contact">
+    <V-outputattribute id="Id"/>
+    <V-inputattribute id="Naam"/>
+    <V-inputattribute id="Adres"/>
+    <V-inputattribute id="Postcode"/>
+    <V-inputattribute id="Woonplaats"/>
+    <V-searchattribute id="Email"/>
+    <V-inputattribute id="Geslacht"/>
+    <V-inputattribute id="Geboortedatum"/>
+    <V-inputattribute id="Telefoon"/>
+    <V-inputattribute id="Dossier"/>
+    <V-inputattribute id="Foto"/>
+    <V-action id="Wijzigen Contact"/>
+</V-form>
+<V-form id="Verwijderen Contact">
+    <V-outputattribute id="Id"/>
+    <V-outputattribute id="Naam"/>
+    <V-ouputattribute id="Adres"/>
+    <V-ouputattribute id="Postcode"/>
+    <V-ouputattribute id="Woonplaats"/>
+    <V-searchattribute id="Email"/>
+    <V-ouputattribute id="Geslacht"/>
+    <V-ouputattribute id="Geboortedatum"/>
+    <V-ouputattribute id="Telefoon"/>
+    <V-ouputattribute id="Dossier"/>
+    <V-ouputattribute id="Foto"/>
+    <V-action id="Verwijderen Contact"/>
+</V-form>
+
+
+<V-script id="Nieuw Contact">
+    <V-message id="Nieuw Contact" verb="Post" object="Contact">
+        <V-attribute id="Id"/>
+        <V-attribute id="Naam"/>
+        <V-attribute id="Adres"/>
+        <V-attribute id="Postcode"/>
+        <V-attribute id="Woonplaats"/>
+        <V-attribute id="Email"/>
+        <V-attribute id="Geslacht"/>
+        <V-attribute id="Geboortedatum"/>
+        <V-attribute id="Telefoon"/>
+        <V-attribute id="Dossier"/>
+        <V-attribute id="Foto"/>
+    </V-message>
+</V-script>
+<V-script id="Wijzigen Contact">
+    <V-message id="Wijzigen Contact" verb="Put" object="Contact">
+        <V-attribute id="Id"/>
+        <V-attribute id="Naam"/>
+        <V-attribute id="Adres"/>
+        <V-attribute id="Postcode"/>
+        <V-attribute id="Woonplaats"/>
+        <V-attribute id="Email"/>
+        <V-attribute id="Geslacht"/>
+        <V-attribute id="Geboortedatum"/>
+        <V-attribute id="Telefoon"/>
+        <V-attribute id="Dossier"/>
+        <V-attribute id="Foto"/>
+</V-script>
+
+<V-script id="Verwijderen Contact">
+    <V-message id="Verwijderen Contact" verb="Delete" object="Contact">
+        <V-attribute id="Id"/>
+    </V-message>
+</V-script>
+
+<V-business-rules>
+    <V-rule id="Agerule" expression="age('geboortedatum')>=21"/>
+</V-business-rules>
+
+<V-report id="Overzicht op naam" lines="60">
+    <V-objects v-for="contact in contacts" JSONP="Overzicht-op-naam">
+        <V-attribute id="Id"/>
+        <V-attribute id="Naam"/>
+        <V-attribute id="Adres"/>
+        <V-attribute id="Postcode"/>
+        <V-attribute id="Woonplaats"/>
+        <V-attribute id="Email"/>
+        <V-attribute id="Geslacht"/>
+        <V-attribute id="Geboortedatum"/>
+        <V-attribute id="Telefoon"/>
+        <V-attribute id="Dossier"/>
+        <V-attribute id="Foto"/>
+    </V-objects>
+</V-report>
+<V-report id="Overzicht op plaats" lines="60">
+    <V-objects v-for="plaats in plaatsen" id="contact" JSONP="Plaatsen">
+        <V-header id="Woonplaats"/>
+        <div v-for="Contact in Contacten" JSONP="Contacten?{plaats}">
+            <V-attribute id="Id"/>
+            <V-attribute id="Naam"/>
+            <V-attribute id="Adres"/>
+            <V-attribute id="Postcode"/>
+            <V-attribute id="Email"/>
+            <V-attribute id="Geslacht"/>
+            <V-attribute id="Geboortedatum"/>
+            <V-attribute id="Telefoon"/>
+            <V-attribute id="Dossier"/>
+            <V-attribute id="Foto"/>
+        </div>
+        <V-footer> aantal contacten:
+            <expression>count("id")</expression>
+        </V-footer>
+    </V-objects>
+    <V-footer> totaal aantal contacten
+        <expression>count("id")</expression>
+    </V-footer>
+</V-report>
+</body>
+
+</html>
