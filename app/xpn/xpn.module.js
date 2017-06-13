@@ -15,7 +15,17 @@
                         return $stateParams.id;
                     }
                 }
-            });
+            })
+            .state("xpnReport", {
+                url: "/report/:id",
+                component: "xpnReport",
+                resolve: {
+                    id: function ($stateParams) {
+                        return $stateParams.id;
+                    }
+                }
+            })
+        ;
 
     });
 
@@ -57,7 +67,8 @@
         "           <a class='dropdown-toggle' data-toggle='dropdown' href='#'>{{ menu.id }} <span class='caret'></span></a>" +
         "           <ul class='dropdown-menu'>" +
         "               <li ng-repeat='item in menu.items'>" +
-        "                   <a ui-sref='xpnForm({id: item.id})'>{{ item.id }}</a>" +
+        "                   <a ng-if='item.report' ui-sref='xpnReport({id: item.report})'><i class='glyphicon glyphicon-list'></i> {{ item.id }}</a>" +
+        "                   <a ng-if='item.form' ui-sref='xpnForm({id: item.form})'><i class='glyphicon glyphicon-pencil'></i> {{ item.id }}</a>" +
         "               </li>" +
         "           </ul>" +
         "       </li>" +
@@ -94,12 +105,14 @@
             menuHeader: "^xpnMenuHeader"
         },
         bindings: {
-            id: "@"
+            id: "@",
+            report: "@",
+            form: "@"
         },
         controller: function () {
             var self = this;
             self.$onInit = function () {
-                self.xpnHeader.addSubMenu(self.menuHeader.id, {id: self.id})
+                self.xpnHeader.addSubMenu(self.menuHeader.id, {id: self.id, form: self.form, report: self.report})
             }
         }
     });
@@ -108,8 +121,15 @@
         bindings: {
             id: "<"
         },
-        template: "<fieldset><legend>{{ $ctrl.id }}</legend></fieldset>"
+        template: "<fieldset><legend>{{ $ctrl.id }}</legend><h4>Form</h4></fieldset>"
 
     });
+
+    module.component("xpnReport", {
+        bindings: {
+            id: "<"
+        },
+        template: "<fieldset><legend>{{ $ctrl.id }}</legend><h4>Report</h4></fieldset>"
+    })
 
 }());
