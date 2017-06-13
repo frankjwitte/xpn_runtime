@@ -2,7 +2,32 @@
 
     "use strict";
 
-    var module = angular.module("xpn", []);
+    var module = angular.module("xpn", ["ui.router"]);
+
+    module.config(function ($stateProvider) {
+
+        $stateProvider
+            .state("xpnForm", {
+                url: "/form/:id",
+                component: "xpnForm",
+                resolve: {
+                    id: function ($stateParams) {
+                        return $stateParams.id;
+                    }
+                }
+            })
+            .state("xpnReport", {
+                url: "/report/:id",
+                component: "xpnReport",
+                resolve: {
+                    id: function ($stateParams) {
+                        return $stateParams.id;
+                    }
+                }
+            })
+        ;
+
+    });
 
     module.component("xpnHeader", {
         transclude: true,
@@ -42,7 +67,8 @@
         "           <a class='dropdown-toggle' data-toggle='dropdown' href='#'>{{ menu.id }} <span class='caret'></span></a>" +
         "           <ul class='dropdown-menu'>" +
         "               <li ng-repeat='item in menu.items'>" +
-        "                   <a href='#'>{{ item.id }}</a>" +
+        "                   <a ng-if='item.report' ui-sref='xpnReport({id: item.report})'><i class='glyphicon glyphicon-list'></i> {{ item.id }}</a>" +
+        "                   <a ng-if='item.form' ui-sref='xpnForm({id: item.form})'><i class='glyphicon glyphicon-pencil'></i> {{ item.id }}</a>" +
         "               </li>" +
         "           </ul>" +
         "       </li>" +
@@ -79,14 +105,31 @@
             menuHeader: "^xpnMenuHeader"
         },
         bindings: {
-            id: "@"
+            id: "@",
+            report: "@",
+            form: "@"
         },
         controller: function () {
             var self = this;
             self.$onInit = function () {
-                self.xpnHeader.addSubMenu(self.menuHeader.id, {id: self.id})
+                self.xpnHeader.addSubMenu(self.menuHeader.id, {id: self.id, form: self.form, report: self.report})
             }
         }
     });
+
+    module.component("xpnForm", {
+        bindings: {
+            id: "<"
+        },
+        template: "<fieldset><legend>{{ $ctrl.id }}</legend><h4>Form</h4></fieldset>"
+
+    });
+
+    module.component("xpnReport", {
+        bindings: {
+            id: "<"
+        },
+        template: "<fieldset><legend>{{ $ctrl.id }}</legend><h4>Report</h4></fieldset>"
+    })
 
 }());

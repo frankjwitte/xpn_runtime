@@ -2,7 +2,13 @@
 
 <html>
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>XPN Prototype</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/site.css">
 </head>
@@ -19,7 +25,7 @@
             </xpn-menu-header>
 
             <xpn-menu-header id="Secretariaat">
-                <xpn-menu-item id="Wijzigen contact" form="Wijzigen  contact"/>
+                <xpn-menu-item id="Wijzigen contact" form="Wijzigen contact"/>
                 <xpn-menu-item id="Overzicht op naam" report="Overzicht op naam"/>
             </xpn-menu-header>
 
@@ -30,11 +36,17 @@
         </xpn-menu>
     </xpn-header>
 
+    <ui-view></ui-view>
 
 </div>
+
+<!-- libraries -->
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+
+<!-- custom -->
 <script src="app/app.js"></script>
 <script src="app/xpn/xpn.module.js"></script>
 </body>
