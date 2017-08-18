@@ -1,7 +1,7 @@
 {
   "name": "xpn_runtime",
   "version": "1.0.0",
-  "description": "",
+  "description": "XPN Runtime implementation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,15 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/frankjwitte/xpn_runtime.git"
   },
-  "author": "",
+  "author": "F.J. Witte",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/frankjwitte/xpn_runtime/issues"
   },
   "homepage": "https://github.com/frankjwitte/xpn_runtime#readme",
   "dependencies": {
-    "angular": "^1.6.4",
-    "angular-ui-router": "^1.0.3",
+    "@uirouter/angularjs": "^1.0.6",
+    "angular": "^1.6.5",
     "jquery": "^3.2.1"
   }
 }
