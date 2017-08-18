@@ -16,26 +16,27 @@
 
 <div class="container" ng-app="app" ng-controller="MainController">
 
-    <xpn-header>
-        <xpn-menu>
+    <xpn title="Contacts app">
+        <xpn-header>
+            <xpn-menu>
 
-            <xpn-menu-header id="Acquisition">
-                <xpn-menu-item id="Nieuw contact" form="Nieuw contact"/>
-                <xpn-menu-item id="Overzicht op plaats" report="Overzicht op plaats"/>
-            </xpn-menu-header>
+                <xpn-menu-header id="Acquisition">
+                    <xpn-menu-item id="Nieuw contact" form="Nieuw contact"/>
+                    <xpn-menu-item id="Overzicht op plaats" report="Overzicht op plaats"/>
+                </xpn-menu-header>
 
-            <xpn-menu-header id="Secretariaat">
-                <xpn-menu-item id="Wijzigen contact" form="Wijzigen contact"/>
-                <xpn-menu-item id="Overzicht op naam" report="Overzicht op naam"/>
-            </xpn-menu-header>
+                <xpn-menu-header id="Secretariaat">
+                    <xpn-menu-item id="Wijzigen contact" form="Wijzigen contact"/>
+                    <xpn-menu-item id="Overzicht op naam" report="Overzicht op naam"/>
+                </xpn-menu-header>
 
-            <xpn-menu-header id="Systeem beheer">
-                <xpn-menu-item id="Verwijderen contact" form="Contact"/>
-            </xpn-menu-header>
+                <xpn-menu-header id="Systeem beheer">
+                    <xpn-menu-item id="Verwijderen contact" form="Contact"/>
+                </xpn-menu-header>
 
-        </xpn-menu>
-    </xpn-header>
-
+            </xpn-menu>
+        </xpn-header>
+    </xpn>
     <ui-view></ui-view>
 
 </div>
@@ -44,7 +45,7 @@
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="node_modules/angular/angular.js"></script>
-<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 
 <!-- custom -->
 <script src="app/app.js"></script>

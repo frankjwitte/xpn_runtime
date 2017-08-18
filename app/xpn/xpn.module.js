@@ -29,6 +29,21 @@
 
     });
 
+    module.component("xpn", {
+        bindings: {
+            title: "@"
+        },
+
+        controller: function ($window) {
+            this.$onInit = function () {
+                console.log("xpn.$onInit");
+                if (this.title) {
+                    $window.document.title = this.title;
+                }
+            }
+        }
+    });
+
     module.component("xpnHeader", {
         transclude: true,
         controller: function () {
